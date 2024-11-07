@@ -27,6 +27,8 @@
                 <td>{{$bicicleta->modelo}}</td>
                 <td>{{$bicicleta->aro}}</td>
                 <td>{{($bicicleta->cor)}}</td>
+                <td><a href="{{route('edit', $bicicleta->id)}}" title="Editar">Editar</a></td>
+                <td><a href="{{route('delete', $bicicleta->id)}}" title="Deletar">Deletar</a></td>
             </tr>
             @endforeach
         </tbody>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bicicleta;
+use Exception;
 use Illuminate\Http\Request;
 
 class BicicletaController extends Controller
@@ -31,4 +32,39 @@ class BicicletaController extends Controller
             dd("Erro ao inserir Bicicleta!!");
         }
     }
+
+    public function edit($id){
+        return view('bicicleta_edit',[
+            'bicicleta'=>Bicicleta::find($id)
+        ]);
+    }
+
+    public function update(Request $request,$id){
+        $Bicicleta = $request->all();
+
+        try{
+            Bicicleta::findOrFail($id)->update($Bicicleta);
+            return redirect('/bicicletas');
+        }catch(Exception $error){
+            dd($error);
+        }
+    }
+
+    public function delete($id)
+    {
+        if(Bicicleta::find($id)->delete())
+            return redirect('/bicicletas');
+        else dd($id);
+    }
+
+    public function destroy($id){
+        try{
+            Bicicleta::destroy($id);
+            return redirect('/bicicletas');
+        }catch(Exception $error){
+            dd($error);
+        }
+    }
+
+
 }
