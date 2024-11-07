@@ -10,3 +10,7 @@ Route::get('/', function () {
 Route::get('/bicicletas', [BicicletaController::class,'index']);
 
 Route::get('/bicicleta/{$id}', [BicicletaController::class, 'show']);
+
+Route::get('/bicicleta', [BicicletaController::class, 'create']);
+
+Route::post('/bicicleta', [BicicletaController::class, 'store']);

@@ -30,6 +30,9 @@
             </tr>
             @endforeach
         </tbody>
+        <tr align="center">
+            <td colspan="2"><a href="/bicicleta" style="display: inline">Registrar bike</a></td>
+        </tr>
     </table>
     @else
     <p>Bicicletas não encontrados! </p>

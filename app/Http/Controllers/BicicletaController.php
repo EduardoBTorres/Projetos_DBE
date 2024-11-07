@@ -7,12 +7,6 @@ use Illuminate\Http\Request;
 
 class BicicletaController extends Controller
 {
-    private $bicicleta;
-
-    public function __construct()
-    {
-        $this->bicicleta = new Bicicleta();
-    }
 
     public function index()
     {
@@ -22,5 +16,19 @@ class BicicletaController extends Controller
     public function show($id)
     {
         return view('bicicleta', ['bicicleta' => Bicicleta::find($id)]);
+    }
+
+    public function create(){
+        return view('bicicleta_create');
+    }
+
+    public function store(Request $req){
+        $bicicleta = $req->all();
+
+        if(Bicicleta::create($bicicleta)){
+            return redirect('/bicicletas');
+        }else {
+            dd("Erro ao inserir Bicicleta!!");
+        }
     }
 }

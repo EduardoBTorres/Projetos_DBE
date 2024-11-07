@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('bicicletas', function (Blueprint $table) {
             $table->id();
+            $table->timestamp('updated_at');
+            $table->timestamp('created_at');
             $table->string('marca');
             $table->string('modelo');
             $table->integer('aro');
