@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <td>Modelo:</td>
-                <td><input type="text" name="marca" value="{{$bicicleta->modelo}}"/></td>
+                <td><input type="text" name="modelo" value="{{$bicicleta->modelo}}"/></td>
             </tr>
             <tr>
                 <td>Aro:</td>

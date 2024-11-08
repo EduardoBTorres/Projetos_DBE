@@ -40,31 +40,43 @@ class BicicletaController extends Controller
     }
 
     public function update(Request $request,$id){
-        $Bicicleta = $request->all();
+        $bicicleta = $request->all();
 
         try{
-            Bicicleta::findOrFail($id)->update($Bicicleta);
+            Bicicleta::findOrFail($id)->update($bicicleta);
             return redirect('/bicicletas');
         }catch(Exception $error){
             dd($error);
         }
     }
+
+    // public function delete($id)
+    // {
+    //     if(Bicicleta::find($id)->delete())
+    //         return redirect('/bicicletas');
+    //     else dd($id);
+    // }
+
+    // public function destroy($id){
+    //     try{
+    //         Bicicleta::destroy($id);
+    //         return redirect('/bicicletas');
+    //     }catch(Exception $error){
+    //         dd($error);
+    //     }
+    // }
 
     public function delete($id)
     {
-        if(Bicicleta::find($id)->delete())
-            return redirect('/bicicletas');
-        else dd($id);
+        return view('bicicletas_remove', ['bicicleta' => Bicicleta::find($id)]);
     }
 
-    public function destroy($id){
-        try{
-            Bicicleta::destroy($id);
+    public function remove(Request $req, $id)
+    {
+        if($req->confirmar==="Deletar")
+            if(!Bicicleta::destroy($id))
+                dd("Erro ao deletar $id !");
             return redirect('/bicicletas');
-        }catch(Exception $error){
-            dd($error);
-        }
     }
-
 
 }

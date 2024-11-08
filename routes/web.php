@@ -24,3 +24,5 @@ Route::post('/bicicleta/{id}/update', [BicicletaController::class, 'update'])->n
 
 //Rota de DELETE
 Route::get('/bicicleta/{id}/delete', [BicicletaController::class, 'delete'])->name('delete');
+
+Route::post('/bicicleta/{id}/delete', [BicicletaController::class, 'remove'])->name('remove');
