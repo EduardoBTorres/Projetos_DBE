@@ -50,25 +50,18 @@ class BicicletaController extends Controller
         }
     }
 
-    // public function delete($id)
-    // {
-    //     if(Bicicleta::find($id)->delete())
-    //         return redirect('/bicicletas');
-    //     else dd($id);
-    // }
-
-    // public function destroy($id){
-    //     try{
-    //         Bicicleta::destroy($id);
-    //         return redirect('/bicicletas');
-    //     }catch(Exception $error){
-    //         dd($error);
-    //     }
-    // }
+    public function destroy($id){
+        try{
+            Bicicleta::destroy($id);
+            return redirect('/bicicletas');
+        }catch(Exception $error){
+            dd($error);
+        }
+    }
 
     public function delete($id)
     {
-        return view('bicicletas_remove', ['bicicleta' => Bicicleta::find($id)]);
+        return view('bicicleta_remove', ['bicicleta' => Bicicleta::find($id)]);
     }
 
     public function remove(Request $req, $id)

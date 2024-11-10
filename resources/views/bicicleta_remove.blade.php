@@ -21,7 +21,7 @@
                 <td>
                     <form action="{{ route('remove',$bicicleta->id) }}" method='post'>
                         @csrf
-                        <input type="submit" name='confirmar' value="Remover" />
+                        <input type="submit" name='confirmar' value="Deletar" />
                     </form>
                 </td>
                 <td>
