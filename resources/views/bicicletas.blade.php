@@ -37,7 +37,9 @@
     <p>Bicicletas não encontrados! </p>
     @endif
     <tr align="center">
-        <td colspan="2"><a href="/bicicleta" style="display: inline">Registrar bike</a></td>
+        <td colspan="2"><a href="/bicicleta" style="display: inline">Registrar bike</a></td><br></br>
+        <td colspan="2"><a href="/users" style="display: inline">Usuarios</a></td><br></br>
+        <td colspan="2"><a href="/atividades" style="display: inline">Atividades</a></td>
     </tr>
 </body>
 </html>

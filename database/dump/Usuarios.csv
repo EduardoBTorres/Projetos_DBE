@@ -1,0 +1,3 @@
+"id","name","email","email_verified_at","password","remember_token","created_at","updated_at","cpf"
+"2","Eduardo Bertinetti Torres","eduardo@gmail.com",NULL,"$2y$12$dSNxC/Kr3AUgGdt/zzSwKuJDAjqi4JWJY6qjvU2Ukd2/uE1eW9n1.",NULL,"2024-11-11 16:42:07","2024-11-11 16:42:07","047.646.290-89"
+"3","Eduardo Bertinetti","eduardotorres@academico.ifsul.edu.br",NULL,"$2y$12$kX8dY9BO5ySVeGAKRADKx.XFTmvE/TU8p0hGUCnrPRWcvEoP2ACAq",NULL,"2024-11-11 16:42:29","2024-11-11 16:42:29","12345678911"
