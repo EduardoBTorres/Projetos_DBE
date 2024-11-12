@@ -11,25 +11,22 @@ Route::get('/', function () {
 
 //BICICLETA
 //Rotas de READ
-Route::get('/bicicletas', [BicicletaController::class,'index']);
+Route::controller(BicicletaController::class)->group(function () {
+    Route::prefix('/bicicletas')->group(function () {
+        Route::get('/', 'index')->name("bicicleta.index");
+        Route::get('/{id}','show')->name('bicicleta.show');
+    });
 
-Route::get('/bicicleta/{id}', [BicicletaController::class, 'show'])->name('show');
+    Route::prefix('/bicicleta')->group(function () {
+        Route::get('/','create')->name('bicicleta.create');
+        Route::post('/','store')->name('bicicleta.store');
+        Route::get('/{id}/edit', 'edit')->name('bicicleta.edit');
+        Route::get('/{id}/update','update')->name('bicicleta.update');
+        Route::get('/{id}/delete','delete')->name('bicicleta.delete');
+        Route::post('/{id}/remove','remove')->name('bicicleta.remove');
 
-//Rotas de CREATE
-Route::get('/bicicleta', [BicicletaController::class, 'create']);
-
-Route::post('/bicicleta', [BicicletaController::class, 'store']);
-
-//Rotas de UPDATE
-Route::get('/bicicleta/{id}/edit', [BicicletaController::class, 'edit'])->name('edit');
-
-Route::post('/bicicleta/{id}/update', [BicicletaController::class, 'update'])->name('update');
-
-//Rota de DELETE
-Route::get('/bicicleta/{id}/delete', [BicicletaController::class, 'delete'])->name('delete');
-
-Route::post('/bicicleta/{id}/delete', [BicicletaController::class, 'remove'])->name('remove');
-
+    });
+});
 
 //ATIVIDADES
 Route::get('/atividades', [AtividadesController::class,'index']);
