@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AtividadesCollection;
+use App\Http\Resources\AtividadesResource;
 use App\Models\Atividades;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,7 @@ class AtividadesController extends Controller
      */
     public function index()
     {
-        //
+        return new AtividadesCollection(Atividades::all());
     }
 
     /**
@@ -29,7 +31,7 @@ class AtividadesController extends Controller
      */
     public function show(Atividades $atividades)
     {
-        //
+        return new AtividadesResource($atividades);
     }
 
     /**
