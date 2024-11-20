@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\Controller;
+use App\Http\Requests\UserStoreRequest;
 use App\Http\Resources\UserCollections;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -21,15 +23,13 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        $user = $request->all();
-
-        if(User::create($user)){
-            return response()->json(['Usuário criado' => '201']);
-        } else {
-            return response()->json(['Usuário não criado' => '500']);
-        }   
+        try {
+            return new UserStoreRequest(User::create($request->validated()));
+        } catch (Exception $error) {
+            $this->errorHandler("Erro ao criar Atividade!!",$error);
+        }
     }
 
     /**

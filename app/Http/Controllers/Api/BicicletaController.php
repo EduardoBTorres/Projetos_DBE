@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\Controller;
+use App\Http\Requests\BicicletaStoreRequest;
 use App\Http\Resources\BicicletaCollection;
 use App\Http\Resources\BicicletaResource;
 use App\Models\Bicicleta;
+use Exception;
 use Illuminate\Http\Request;
 
 class BicicletaController extends Controller
@@ -21,14 +23,12 @@ class BicicletaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BicicletaStoreRequest $request)
     {
-        $bicicleta = $request->all();
-
-        if(Bicicleta::create($bicicleta)){
-            return response()->json(['Bicicleta criada' => '201']);
-        } else {
-            return response()->json(['Bicicleta não criada' => '500']);
+        try {
+            return new BicicletaStoreRequest(Bicicleta::create($request->validated()));
+        } catch (Exception $error) {
+            $this->errorHandler("Erro ao criar Bicicleta!!",$error);
         }
     }
 

@@ -6,17 +6,17 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\JsonResource;
 
-class AtividadesStoredResource extends AtividadesResource
+class BicicletaStoredResource extends BicicletaResource
 {
     public function withResponse(Request $request, JsonResponse $response)
     {
-        $response->setStatusCode(201,'Atividade Criada!');
+        $response->setStatusCode(201,'Bicicleta Criada!');
     }
 
     public function with(Request $request): array
     {
         return [
-            'message' => 'Atividade criado com sucesso!!',
+            'message' => 'Bicicleta criada com sucesso!!',
         ];
     }
 }
