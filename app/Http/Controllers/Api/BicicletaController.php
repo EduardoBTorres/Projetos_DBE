@@ -23,7 +23,13 @@ class BicicletaController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $bicicleta = $request->all();
+
+        if(Bicicleta::create($bicicleta)){
+            return response()->json(['Bicicleta criada' => '201']);
+        } else {
+            return response()->json(['Bicicleta não criada' => '500']);
+        }
     }
 
     /**

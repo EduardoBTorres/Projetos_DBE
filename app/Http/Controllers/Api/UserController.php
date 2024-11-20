@@ -23,7 +23,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->all();
+
+        if(User::create($user)){
+            return response()->json(['Usuário criado' => '201']);
+        } else {
+            return response()->json(['Usuário não criado' => '500']);
+        }   
     }
 
     /**
