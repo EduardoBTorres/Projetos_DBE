@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Controller;
 use App\Http\Requests\BicicletaStoreRequest;
+use App\Http\Requests\BicicletaUpdateRequest;
 use App\Http\Resources\BicicletaCollection;
 use App\Http\Resources\BicicletaResource;
+use App\Http\Resources\BicicletaStoredResource;
+use App\Http\Resources\UserResource;
 use App\Models\Bicicleta;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -23,10 +27,11 @@ class BicicletaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(BicicletaStoreRequest $request)
     {
         try {
-            return new BicicletaStoreRequest(Bicicleta::create($request->validated()));
+            return new BicicletaStoredResource(Bicicleta::create($request->validated()));
         } catch (Exception $error) {
             $this->errorHandler("Erro ao criar Bicicleta!!",$error);
         }
@@ -43,9 +48,15 @@ class BicicletaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Bicicleta $bicicleta)
+    public function update(BicicletaUpdateRequest $request, Bicicleta $bicicleta)//FormRequest
     {
-        //
+        try {
+            $bicicleta->update($request->validated());
+            return (new BicicletaResource($bicicleta))
+                ->additional(['message' => 'Bicicleta atualizado com sucesso!!']);
+        } catch (Exception $error) {
+            return $this->errorHandler("Erro ao atualizar bicicleta!!", $error);
+        }
     }
 
     /**
@@ -53,6 +64,11 @@ class BicicletaController extends Controller
      */
     public function destroy(Bicicleta $bicicleta)
     {
-        //
+        try {
+            $bicicleta->delete();
+            return (new BicicletaResource($bicicleta))->additional(["message" => "Bicicleta removido!!!"]);
+        } catch (Exception $error) {
+            return $this->errorHandler("Erro ao remover bicicleta!!", $error);
+        }
     }
 }

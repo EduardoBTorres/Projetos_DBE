@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Controller;
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserCollections;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\UserStoredResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -26,9 +28,9 @@ class UserController extends Controller
     public function store(UserStoreRequest $request)
     {
         try {
-            return new UserStoreRequest(User::create($request->validated()));
+            return new UserStoredResource(User::create($request->validated()));
         } catch (Exception $error) {
-            $this->errorHandler("Erro ao criar Atividade!!",$error);
+            $this->errorHandler("Erro ao criar Usuario!!",$error);
         }
     }
 
@@ -43,9 +45,15 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)//FormRequest
     {
-        //
+        try {
+            $user->update($request->validated());
+            return (new UserResource($user))
+                ->additional(['message' => 'Usuario atualizado com sucesso!!']);
+        } catch (Exception $error) {
+            return $this->errorHandler("Erro ao atualizar usuario!!", $error);
+        }
     }
 
     /**
@@ -53,6 +61,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        try {
+            $user->delete();
+            return (new UserResource($user))->additional(["message" => "User removido!!!"]);
+        } catch (Exception $error) {
+            return $this->errorHandler("Erro ao remover usuario!!", $error);
+        }
     }
 }

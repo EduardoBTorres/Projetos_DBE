@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Controller;
 use App\Http\Requests\AtividadesStoreRequest;
+use App\Http\Requests\AtividadesUpdateRequest;
 use App\Http\Resources\AtividadesCollection;
 use App\Http\Resources\AtividadesResource;
+use App\Http\Resources\AtividadesStoredResource;
 use App\Models\Atividades;
 use Exception;
 use Illuminate\Http\Request;
@@ -23,10 +25,11 @@ class AtividadesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(AtividadesStoreRequest $request)
     {
         try {
-            return new AtividadesStoreRequest(Atividades::create($request->validated()));
+            return new AtividadesStoredResource(Atividades::create($request->validated()));
         } catch (Exception $error) {
             $this->errorHandler("Erro ao criar Atividade!!",$error);
         }
@@ -43,9 +46,15 @@ class AtividadesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Atividades $atividades)
+    public function update(AtividadesUpdateRequest $request, Atividades $atividades)//FormRequest
     {
-        //
+        try {
+            $atividades->update($request->validated());
+            return (new AtividadesResource($atividades))
+                ->additional(['message' => 'Atividade atualizado com sucesso!!']);
+        } catch (Exception $error) {
+            return $this->errorHandler("Erro ao atualizar atividade!!", $error);
+        }
     }
 
     /**
@@ -53,6 +62,11 @@ class AtividadesController extends Controller
      */
     public function destroy(Atividades $atividades)
     {
-        //
+        try {
+            $atividades->delete();
+            return (new AtividadesResource($atividades))->additional(["message" => "Atividade removido!!!"]);
+        } catch (Exception $error) {
+            return $this->errorHandler("Erro ao remover atividade!!", $error);
+        }
     }
 }
