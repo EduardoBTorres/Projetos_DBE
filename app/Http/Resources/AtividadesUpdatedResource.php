@@ -2,11 +2,12 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AtividadesUpdatedResource extends AtividadesResource
+class AtividadesUpdatedResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

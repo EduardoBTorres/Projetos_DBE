@@ -64,7 +64,7 @@ class AtividadesController extends Controller
     {
         try {
             $atividades->delete();
-            return (new AtividadesResource($atividades))->additional(["message" => "Atividade removido!!!"]);
+            return (new AtividadesResource($atividades))->additional(["message" => "Atividade removida!!!"]);
         } catch (Exception $error) {
             return $this->errorHandler("Erro ao remover atividade!!", $error);
         }
