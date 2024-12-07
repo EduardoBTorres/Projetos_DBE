@@ -13,11 +13,11 @@ class LoginRequest extends FormRequest
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
-    {
-        $user = User::where('email', $this->email)->first();
-            if(!$user || !Hash::check($this->password, $user->password))
-                throw new Exception('Credenciais inválidas');
-        $this->merge(['user'=>$user]);
+     {
+    //     $user = User::where('email', $this->email)->first();
+    //         if(!$user || !Hash::check($this->password, $user->password))
+    //             throw new Exception('Credenciais inválidas');
+    //     $this->merge(['user'=>$user]);
         return true;
     }
 
@@ -29,7 +29,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'email' => 'required',
             'password' => 'required|string',
         ];
     }

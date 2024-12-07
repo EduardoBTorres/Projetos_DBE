@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Atividades;
 use App\Models\User;
+use Database\Factories\AtividadesFactory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,5 +22,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@dev.test',
             'password' => env('APP_ADMIN_PASSWORD', 'adminadmin')
         ]);
+
+        Atividades::factory(10)->create();
     }
 }

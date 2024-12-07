@@ -38,19 +38,19 @@ class AtividadesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Atividades $atividades)
+    public function show(Atividades $atividade)
     {
-        return new AtividadesResource($atividades);
+        return new AtividadesResource($atividade);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(AtividadesUpdateRequest $request, Atividades $atividades)//FormRequest
+    public function update(AtividadesUpdateRequest $request, Atividades $atividade)//FormRequest
     {
         try {
-            $atividades->update($request->validated());
-            return (new AtividadesResource($atividades))
+            $atividade->update($request->validated());
+            return (new AtividadesResource($atividade))
                 ->additional(['message' => 'Atividade atualizado com sucesso!!']);
         } catch (Exception $error) {
             return $this->errorHandler("Erro ao atualizar atividade!!", $error);
@@ -60,11 +60,14 @@ class AtividadesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Atividades $atividades)
+    public function destroy(Atividades $atividade)
     {
         try {
-            $atividades->delete();
-            return (new AtividadesResource($atividades))->additional(["message" => "Atividade removida!!!"]);
+            $atividade->delete();
+            if (!$atividade) {
+                 throw new Exception("Atividade nao encontrada!!");
+            }
+            return (new AtividadesResource($atividade))->additional(["message" => "Atividade removida!!!"]);
         } catch (Exception $error) {
             return $this->errorHandler("Erro ao remover atividade!!", $error);
         }

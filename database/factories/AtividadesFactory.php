@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Produto>
  */
-class AtividaesFactory extends Factory
+class AtividadesFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,7 +21,8 @@ class AtividaesFactory extends Factory
             "endereco" => fake()->sentence(10),
             "distancia" => fake()->randomFloat(2, 100, 10000),
             "tempo" => fake()->randomNumber(3, false),
-            "data" => fake()->numberBetween(0, 1),
+            "descricao" => fake()->text(100),
+            "data" => fake()->date(),
         ];
     }
 }

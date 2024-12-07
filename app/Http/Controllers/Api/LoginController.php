@@ -14,7 +14,9 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
         try{
-            $user=$request->user;
+            $user = User::where('email', $request->email)->first();
+            if(!$user || !Hash::check($request->password, $user->password))
+                throw new Exception('Credenciais inválidas');
             $token = $user->createToken($user)->plainTextToken;
             return compact('token');//['token'=>$token]
         }catch(Exception $error){

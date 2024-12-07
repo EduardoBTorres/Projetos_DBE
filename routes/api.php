@@ -18,9 +18,9 @@ Route::apiResource('atividades',AtividadesController::class)
         ->only(['index','show']);//sobreescreve a proteção de index e show
 
 Route::apiResource('users',UserController::class)->only(['store']);//Desprotegidas
+
 Route::apiResource('users',UserController::class)
-    ->middleware('auth:sanctum')
-    ->except(['store']);//cadastro
+    ->middleware('auth:sanctum');
 
 
 Route::apiResource('bicicletas',BicicletaController::class)
@@ -35,14 +35,14 @@ Route::post('/logout', [LoginController::class, 'logout'])
     ->middleware('auth:sanctum');
 
 
-Route::apiResource('bicicletas', BicicletaController::class);
+// // Route::apiResource('bicicletas', BicicletaController::class);
 
-Route::apiResource('atividades', AtividadesController::class);
+// Route::apiResource('atividades', AtividadesController::class);
 
-Route::apiResource('users', UserController::class);
+// Route::apiResource('users', UserController::class);
 
-Route::post('/bicicleta', [BicicletaController::class, 'store']);
+// Route::post('/bicicleta', [BicicletaController::class, 'store']);
 
-Route::post('/atividades', [AtividadesController::class, 'store']);
+// Route::post('/atividades', [AtividadesController::class, 'store']);
 
-Route::post('/users', [UserController::class, 'store']);
+// Route::post('/users', [UserController::class, 'store']);
