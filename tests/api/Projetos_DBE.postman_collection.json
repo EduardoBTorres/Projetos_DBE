@@ -10,10 +10,14 @@
 			"name": "Atividades",
 			"item": [
 				{
-					"name": "storeAtividades",
+					"name": "storeAtividadesFuncionando",
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
 						"url": {
 							"raw": "http://localhost:8000/api/atividades",
 							"protocol": "http",
@@ -30,12 +34,12 @@
 					"response": []
 				},
 				{
-					"name": "showAtividades",
+					"name": "showAtividadesFuncionando",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/atividades",
+							"raw": "http://localhost:8000/api/atividades/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -43,19 +47,30 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"atividades"
+								"atividades",
+								"5"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "deleteAtividades",
+					"name": "deleteAtividadesFuncionando",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|MCH3yti5fEMTVOkUbIedHj2J59DN9sgA33mMiXAoa611f813",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/atividades/1",
+							"raw": "http://localhost:8000/api/atividades/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -64,19 +79,33 @@
 							"path": [
 								"api",
 								"atividades",
-								"1"
+								"5"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "updateAtividades",
+					"name": "updateAtividadesFuncionando",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|vro6ym14RsICoG7AfqzCev2OEgucSo9YzF8nbv5Pb70203c0",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
 						"url": {
-							"raw": "http://localhost:8000/api/atividades/2",
+							"raw": "http://localhost:8000/api/atividades/4?titulo=corrida&endereco=pelotas&distancia=40",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -85,19 +114,33 @@
 							"path": [
 								"api",
 								"atividades",
-								"2"
+								"4"
+							],
+							"query": [
+								{
+									"key": "titulo",
+									"value": "corrida"
+								},
+								{
+									"key": "endereco",
+									"value": "pelotas"
+								},
+								{
+									"key": "distancia",
+									"value": "40"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "indexAtividades",
+					"name": "indexAtividadesFuncionando",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/atividades/",
+							"raw": "http://localhost:8000/api/atividades",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -105,8 +148,7 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"atividades",
-								""
+								"atividades"
 							]
 						}
 					},
@@ -118,12 +160,12 @@
 			"name": "Bicicleta",
 			"item": [
 				{
-					"name": "showBicicletas",
+					"name": "showBicicletasFuncioanando",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/bicicletas/2",
+							"raw": "http://localhost:8000/api/bicicletas/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -132,14 +174,14 @@
 							"path": [
 								"api",
 								"bicicletas",
-								"2"
+								"4"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "indexBicicletas",
+					"name": "indexBicicletasFuncionando",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -159,10 +201,51 @@
 					"response": []
 				},
 				{
-					"name": "storeBicicletas",
+					"name": "storeBicicletasFuncionando",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|Dgb3h8WYh9fXrfT6mbcUKJwEmuUxBBMSeewdO2ux8a3c18c7",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "marca",
+									"value": "dfsfs",
+									"type": "text"
+								},
+								{
+									"key": "modelo",
+									"value": "corrida",
+									"type": "text"
+								},
+								{
+									"key": "aro",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "cor",
+									"value": "rosa",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
 							"raw": "http://localhost:8000/api/bicicletas",
 							"protocol": "http",
@@ -173,30 +256,18 @@
 							"path": [
 								"api",
 								"bicicletas"
-							],
-							"query": [
-								{
-									"key": "marca",
-									"value": "caloi",
-									"disabled": true
-								},
-								{
-									"key": "modelo",
-									"value": "bmx",
-									"disabled": true
-								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "updateBicicletas",
+					"name": "updateBicicletasFuncionando",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/bicicletas/2?aro=25",
+							"raw": "http://localhost:8000/api/bicicletas/2?marca=ssssssss",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -209,8 +280,8 @@
 							],
 							"query": [
 								{
-									"key": "aro",
-									"value": "25"
+									"key": "marca",
+									"value": "ssssssss"
 								}
 							]
 						}
@@ -218,12 +289,12 @@
 					"response": []
 				},
 				{
-					"name": "deleteBicicletas",
+					"name": "deleteBicicletasFuncionando",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/bicicletas/2",
+							"raw": "http://localhost:8000/api/bicicletas/8",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -232,7 +303,7 @@
 							"path": [
 								"api",
 								"bicicletas",
-								"2"
+								"8"
 							]
 						}
 					},
@@ -244,7 +315,7 @@
 			"name": "Users",
 			"item": [
 				{
-					"name": "indexUsers",
+					"name": "indexUsersFuncionando",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -264,12 +335,32 @@
 					"response": []
 				},
 				{
-					"name": "storeUsers",
+					"name": "storeUsersFuncionando",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|Dgb3h8WYh9fXrfT6mbcUKJwEmuUxBBMSeewdO2ux8a3c18c7",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
 						"url": {
-							"raw": "http://localhost:8000/api/users?name =dudu&email=dudu@gmail.com&password=123&cpf=04754564546",
+							"raw": "http://localhost:8000/api/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -278,10 +369,52 @@
 							"path": [
 								"api",
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "showUsersFuncionando",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/users/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUsersFuncionando",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/users/7?name=dudu&email=dudu@gmail.com&password=78999999",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"7"
 							],
 							"query": [
 								{
-									"key": "name ",
+									"key": "name",
 									"value": "dudu"
 								},
 								{
@@ -290,11 +423,7 @@
 								},
 								{
 									"key": "password",
-									"value": "123"
-								},
-								{
-									"key": "cpf",
-									"value": "04754564546"
+									"value": "78999999"
 								}
 							]
 						}
@@ -302,54 +431,12 @@
 					"response": []
 				},
 				{
-					"name": "indexUsers",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/users/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "updateUsers",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/users/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "deleteUsers",
+					"name": "deleteUsersFuncionando",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/users/2",
+							"raw": "http://localhost:8000/api/users/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -358,7 +445,78 @@
 							"path": [
 								"api",
 								"users",
-								"2"
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "tomas11@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/login/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|Y2T1PRto2dwsfv37bNODVWR7sL1x8JZoDU1WIHHdd6e5aaba",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"logout"
 							]
 						}
 					},
