@@ -22,7 +22,7 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable | max:20',
+            'name' => 'nullable | max:30',
             'email' => 'nullable | max:300',
             'password' => 'nullable | numeric | min:1',
         ];
