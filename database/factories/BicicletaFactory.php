@@ -2,25 +2,22 @@
 
 namespace Database\Factories;
 
+use App\Models\Bicicleta;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Produto>
- */
 class BicicletaFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Bicicleta::class;
+
     public function definition(): array
     {
         return [
-            "marca" => fake()->text(30),
-            "modelo" => fake()->sentence(10),
-            "aro" => fake()->randomFloat(2, 100, 10000),
-            "cor" => fake()->text(30),
+            'marca' => $this->faker->word(),
+            'modelo' => $this->faker->sentence(),
+            'aro' => $this->faker->randomNumber(2),
+            'cor' => $this->faker->colorName(),
+            'user_id' => User::factory(),  // Associa uma bicicleta a um usuário
         ];
     }
 }

@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('bicicletas', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('updated_at');
-            $table->timestamp('created_at');
+            $table->timestamps();
             $table->string('marca');
             $table->string('modelo');
             $table->integer('aro');
             $table->string('cor');
+
+            // Relacionamento com a tabela users
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -30,3 +33,4 @@ return new class extends Migration
         Schema::dropIfExists('bicicletas');
     }
 };
+
