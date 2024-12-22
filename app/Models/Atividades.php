@@ -9,7 +9,14 @@ class Atividades extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['titulo', 'endereco', 'distancia', 'tempo', 'data', 'descricao'];
+    protected $fillable =
+    ['titulo',
+    'endereco',
+    'distancia',
+    'tempo', 'data',
+    'descricao',
+    'user_id',
+    'bicicleta_id'];
 
     // Relacionamento com User
     public function user()

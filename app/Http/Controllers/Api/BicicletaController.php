@@ -31,10 +31,23 @@ class BicicletaController extends Controller
     public function store(BicicletaStoreRequest $request)
     {
         try {
-            return new BicicletaStoredResource(Bicicleta::create($request->validated()));
+            // Valida os dados da requisição
+            $validated = $request->validated();
+
+            // Define o user_id automaticamente
+            $validated['user_id'] = $request->user()->id;
+
+            // Cria a atividade com os dados validados
+            return new BicicletaStoredResource(Bicicleta::create($validated));
         } catch (Exception $error) {
-            $this->errorHandler("Erro ao criar Bicicleta!!",$error);
+            return $this->errorHandler("Erro ao criar Atividade!!", $error);
         }
+
+        // try {
+        //     return new BicicletaStoredResource(Bicicleta::create($request->validated()));
+        // } catch (Exception $error) {
+        //     $this->errorHandler("Erro ao criar Bicicleta!!",$error);
+        // }
     }
 
     /**

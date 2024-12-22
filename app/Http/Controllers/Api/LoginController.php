@@ -13,8 +13,10 @@ class LoginController extends Controller
 {
     public function login(LoginRequest $request)
     {
+        // dd($request->all());
         try{
             $user = User::where('email', $request->email)->first();
+            // dd($user);
             if(!$user || !Hash::check($request->password, $user->password))
                 throw new Exception('Credenciais inválidas');
             $token = $user->createToken($user)->plainTextToken;

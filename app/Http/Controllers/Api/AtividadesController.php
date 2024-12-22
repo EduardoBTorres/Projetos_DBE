@@ -26,14 +26,22 @@ class AtividadesController extends Controller
      * Store a newly created resource in storage.
      */
 
-    public function store(AtividadesStoreRequest $request)
-    {
-        try {
-            return new AtividadesStoredResource(Atividades::create($request->validated()));
-        } catch (Exception $error) {
-            $this->errorHandler("Erro ao criar Atividade!!",$error);
-        }
-    }
+     public function store(AtividadesStoreRequest $request)
+     {
+         try {
+             // Valida os dados da requisição
+             $validated = $request->validated();
+
+             // Define o user_id automaticamente
+             $validated['user_id'] = $request->user()->id;
+
+             // Cria a atividade com os dados validados
+             return new AtividadesStoredResource(Atividades::create($validated));
+         } catch (Exception $error) {
+             return $this->errorHandler("Erro ao criar Atividade!!", $error);
+         }
+     }
+
 
     /**
      * Display the specified resource.
@@ -41,6 +49,15 @@ class AtividadesController extends Controller
     public function show(Atividades $atividade)
     {
         return new AtividadesResource($atividade);
+        // try {// Valida os dados da requisição
+        // $validated = $request->validated();
+
+        // // Define o user_id automaticamente
+        // $validated['user_id'] = $request->user()->id;
+        // return new AtividadesResource($atividade);
+        // } catch (Exception $error) {
+        //     return $this->errorHandler("Erro ao visualizar Atividade!!", $error);
+        // }
     }
 
     /**

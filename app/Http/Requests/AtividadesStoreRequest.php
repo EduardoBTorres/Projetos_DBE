@@ -28,6 +28,8 @@ class AtividadesStoreRequest extends FormRequest
             "tempo" => "required | numeric | min:1.99",
             "data" => "required | date",
             "descricao" => "required | max:300",
+            "bicicleta_id" => "nullable | exists:bicicletas,id" // Opcional, mas precisa existir se fornecido
         ];
     }
+
 }
