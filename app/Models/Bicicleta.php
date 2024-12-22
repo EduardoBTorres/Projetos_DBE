@@ -14,10 +14,9 @@ class Bicicleta extends Model
         'modelo',
         'aro',
         'cor',
-        'user_id', // Certifique-se de que o campo user_id é preenchível
+        'user_id',
     ];
 
-    // Definir o relacionamento com o User (se necessário)
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -45,7 +45,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserUpdateRequest $request, User $user)//FormRequest
+    public function update(UserUpdateRequest $request, User $user)
     {
         try {
             $user->update($request->validated());

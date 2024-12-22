@@ -13,14 +13,12 @@ class LoginController extends Controller
 {
     public function login(LoginRequest $request)
     {
-        // dd($request->all());
         try{
             $user = User::where('email', $request->email)->first();
-            // dd($user);
             if(!$user || !Hash::check($request->password, $user->password))
                 throw new Exception('Credenciais inválidas');
             $token = $user->createToken($user)->plainTextToken;
-            return compact('token');//['token'=>$token]
+            return compact('token');
         }catch(Exception $error){
             $this->errorHandler('Erro ao realizar login', $error, 401);
         }
@@ -29,8 +27,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         try{
-            // return response()->json($request->user());
-            $request->user()->tokens()->delete();//currentAccessToken()->delete();
+            $request->user()->tokens()->delete();
             return response()->json(['message' => 'Logout realizado com sucesso']);
         }catch(Exception $error){
             $this->errorHandler('Erro ao realizar logout', $error, 401);
