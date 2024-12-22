@@ -13,6 +13,7 @@ use App\Models\Bicicleta;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BicicletaController extends Controller
 {
@@ -21,7 +22,7 @@ class BicicletaController extends Controller
      */
     public function index()
     {
-        return new BicicletaCollection(Bicicleta::all());
+        return new BicicletaCollection(Bicicleta::where('user_id', Auth::user()->id)->get());
     }
 
     /**
@@ -40,7 +41,7 @@ class BicicletaController extends Controller
             // Cria a atividade com os dados validados
             return new BicicletaStoredResource(Bicicleta::create($validated));
         } catch (Exception $error) {
-            return $this->errorHandler("Erro ao criar Atividade!!", $error);
+            return $this->errorHandler("Erro ao criar Bicicleta!!", $error);
         }
 
         // try {
@@ -55,6 +56,11 @@ class BicicletaController extends Controller
      */
     public function show(Bicicleta $bicicleta)
     {
+        // Verifica se a bicicleta pertence ao usuário logado
+        if ($bicicleta->user_id !== Auth::user()->id) {
+            return response()->json(['error' => 'Acesso não autorizado!'], 403);
+        }
+
         return new BicicletaResource($bicicleta);
     }
 
@@ -63,10 +69,15 @@ class BicicletaController extends Controller
      */
     public function update(BicicletaUpdateRequest $request, Bicicleta $bicicleta)//FormRequest
     {
+        // Verifica se a bicicleta pertence ao usuário logado
+        if ($bicicleta->user_id !== Auth::user()->id) {
+            return response()->json(['error' => 'Acesso não autorizado!'], 403);
+        }
+
         try {
             $bicicleta->update($request->validated());
             return (new BicicletaResource($bicicleta))
-                ->additional(['message' => 'Bicicleta atualizado com sucesso!!']);
+                ->additional(['message' => 'Bicicleta atualizada com sucesso!']);
         } catch (Exception $error) {
             return $this->errorHandler("Erro ao atualizar bicicleta!!", $error);
         }
@@ -77,9 +88,14 @@ class BicicletaController extends Controller
      */
     public function destroy(Bicicleta $bicicleta)
     {
+        // Verifica se a bicicleta pertence ao usuário logado
+        if ($bicicleta->user_id !== Auth::user()->id) {
+            return response()->json(['error' => 'Acesso não autorizado!'], 403);
+        }
+
         try {
             $bicicleta->delete();
-            return (new BicicletaResource($bicicleta))->additional(["message" => "Bicicleta removido!!!"]);
+            return (new BicicletaResource($bicicleta))->additional(["message" => "Bicicleta removida!"]);
         } catch (Exception $error) {
             return $this->errorHandler("Erro ao remover bicicleta!!", $error);
         }

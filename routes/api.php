@@ -14,8 +14,8 @@ Route::get('/user', function (Request $request) {
 Route::apiResource('atividades',AtividadesController::class)
         ->middleware('auth:sanctum');//todas protegidas (post, put, delete)
 
-Route::apiResource('atividades',AtividadesController::class)
-        ->only(['index','show']);//sobreescreve a proteção de index e show
+//Route::apiResource('atividades',AtividadesController::class)
+   //     ->only(['index','show']);//sobreescreve a proteção de index e show
 
 Route::apiResource('users',UserController::class)->only(['store']);//Desprotegidas
 
@@ -26,8 +26,8 @@ Route::apiResource('users',UserController::class)
 Route::apiResource('bicicletas',BicicletaController::class)
     ->middleware('auth:sanctum');//todas protegidas (post, put, delete)
 
-Route::apiResource('bicicletas',BicicletaController::class)
-    ->only(['index','show']);//sobreescreve a proteção de index e show
+// Route::apiResource('bicicletas',BicicletaController::class)
+//     ->only(['index','show']);//sobreescreve a proteção de index e show
 
 
 Route::post('/login', [LoginController::class, 'login']);

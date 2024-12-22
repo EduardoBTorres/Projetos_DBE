@@ -11,6 +11,7 @@ use App\Http\Resources\AtividadesStoredResource;
 use App\Models\Atividades;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AtividadesController extends Controller
 {
@@ -19,7 +20,7 @@ class AtividadesController extends Controller
      */
     public function index()
     {
-        return new AtividadesCollection(Atividades::all());
+        return new AtividadesCollection(Atividades::where('user_id', Auth::user()->id)->get());
     }
 
     /**
@@ -48,7 +49,12 @@ class AtividadesController extends Controller
      */
     public function show(Atividades $atividade)
     {
-        return new AtividadesResource($atividade);
+       // Verifica se a atividade pertence ao usuário logado
+       if ($atividade->user_id !== Auth::user()->id) {
+        return response()->json(['error' => 'Acesso não autorizado!'], 403);
+    }
+
+    return new AtividadesResource($atividade);
         // try {// Valida os dados da requisição
         // $validated = $request->validated();
 
@@ -65,13 +71,25 @@ class AtividadesController extends Controller
      */
     public function update(AtividadesUpdateRequest $request, Atividades $atividade)//FormRequest
     {
+         // Verifica se a atividade pertence ao usuário logado
+         if ($atividade->user_id !== Auth::user()->id) {
+            return response()->json(['error' => 'Acesso não autorizado!'], 403);
+        }
+
         try {
             $atividade->update($request->validated());
             return (new AtividadesResource($atividade))
-                ->additional(['message' => 'Atividade atualizado com sucesso!!']);
+                ->additional(['message' => 'Atividade atualizada com sucesso!']);
         } catch (Exception $error) {
             return $this->errorHandler("Erro ao atualizar atividade!!", $error);
         }
+        // try {
+        //     $atividade->update($request->validated());
+        //     return (new AtividadesResource($atividade))
+        //         ->additional(['message' => 'Atividade atualizado com sucesso!!']);
+        // } catch (Exception $error) {
+        //     return $this->errorHandler("Erro ao atualizar atividade!!", $error);
+        // }
     }
 
     /**
@@ -79,14 +97,25 @@ class AtividadesController extends Controller
      */
     public function destroy(Atividades $atividade)
     {
+         // Verifica se a atividade pertence ao usuário logado
+         if ($atividade->user_id !== Auth::user()->id) {
+            return response()->json(['error' => 'Acesso não autorizado!'], 403);
+        }
+
         try {
             $atividade->delete();
-            if (!$atividade) {
-                 throw new Exception("Atividade nao encontrada!!");
-            }
-            return (new AtividadesResource($atividade))->additional(["message" => "Atividade removida!!!"]);
+            return (new AtividadesResource($atividade))->additional(["message" => "Atividade removida!"]);
         } catch (Exception $error) {
             return $this->errorHandler("Erro ao remover atividade!!", $error);
         }
+        // try {
+        //     $atividade->delete();
+        //     if (!$atividade) {
+        //          throw new Exception("Atividade nao encontrada!!");
+        //     }
+        //     return (new AtividadesResource($atividade))->additional(["message" => "Atividade removida!!!"]);
+        // } catch (Exception $error) {
+        //     return $this->errorHandler("Erro ao remover atividade!!", $error);
+        // }
     }
 }
