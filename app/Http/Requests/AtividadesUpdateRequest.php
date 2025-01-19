@@ -22,9 +22,13 @@ class AtividadesUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'titulo' => 'nullable | max:20',
-            'endereco' => 'nullable | max:300',
-            'distancia' => 'nullable | numeric | min:1',
+            'titulo' => 'nullable|max:20', // Definindo maximo para 255
+            'endereco' => 'nullable|max:20',  // Corrigindo de "endereco" para "local"
+            'distancia' => 'nullable|numeric|min:1',
+            'tempo' => 'nullable|max:30',
+            'data' => 'nullable|date',
+            'descricao' => 'nullable|max:100',
         ];
     }
 }
+
